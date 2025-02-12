@@ -1,5 +1,5 @@
 # 💫 About Me:
- 👩‍💻 I'm currently teaching React<br><br>🧠 I'm currently learning Docker <br><br>👯‍♀️ I'm looking to collaborate on interesting projects. Make a suggestion!<br><br>💬 Ask me about the React [lib](https://react.dev/)<br><br>⚡️ Fun fact: I studied media informatics and finished it with a B.Sc.<br><br>📫 How to reach me: noa351<at>hotmail.de
+ 👩‍💻 I'm currently teaching React<br><br>🧠 I'm currently learning Docker <br><br>👯‍♀️ I'm looking to collaborate on interesting projects. Make a suggestion!<br><br>💬 Ask me about React [lib](https://react.dev/)<br><br>⚡️ Fun fact: I studied media informatics and finished it with a B.Sc.<br><br>📫 How to reach me: noa351<at>hotmail.de
 
 
 ## 🌐 Socials:

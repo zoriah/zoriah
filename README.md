@@ -1,6 +1,13 @@
 # 💫 About Me:
  👩‍💻 I'm currently teaching React<br><br>🧠 I'm currently learning Docker <br><br>👯‍♀️ I'm looking to collaborate on interesting projects. Make a suggestion!<br><br>💬 Ask me about [React lib](https://react.dev/)<br><br>⚡️ Fun fact: I studied media informatics and finished it with a B.Sc.<br><br>📫 How to reach me: noa351@hotmail.de
 
+## 🤖 Agents & Automation
+
+This repository includes automated agents for design and workflow automation:
+
+- **[Image Generator (Dashboard Mockup)](agents/image-generator-dashboard-mockup.json)** - Generates dashboard mockups as PNG/SVG with customizable themes
+- See [agents/](agents/) for complete documentation
+
 
 ## 🌐 Socials:
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/www.linkedin.com/in/naci-osman-aydogan-36148614b) 

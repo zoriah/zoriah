@@ -1,0 +1,75 @@
+{
+  "name": "Image Generator (Dashboard Mockup)",
+  "description": "Erzeugt ein Dashboard‑Mockup (Agents Management) als PNG/SVG; manuell startbar oder per Webhook.",
+  "trigger": [
+    "manual",
+    "webhook"
+  ],
+  "inputs": {
+    "theme": {
+      "type": "string",
+      "default": "light",
+      "options": [
+        "light",
+        "dark"
+      ]
+    },
+    "width": {
+      "type": "integer",
+      "default": 1920
+    },
+    "height": {
+      "type": "integer",
+      "default": 1080
+    },
+    "language": {
+      "type": "string",
+      "default": "de"
+    }
+  },
+  "steps": [
+    {
+      "id": "generate_prompt",
+      "type": "set_prompt",
+      "content": "Act as a senior UI/visual designer. Erstelle ein detailliertes Dashboard‑Mockup (1920×1080 PNG, zusätzlich SVG‑Export) für ein 'Agents Management' Interface. Gesamtstil: modernes Flat Design, klare Hierarchie, abgerundete Karten, leichtes Schatten‑Depth. Layout: obere Navigationsleiste (links Logo/Name: 'Agents'), linke Sidebar (Icons+Labels: Übersicht, Agents, Logs, Settings), Hauptbereich zwei Spalten: links 60% Agentenliste+Detailkarte, rechts 40% Workflow+Metriken. Agentenliste: Avatar, Name, Kurzbeschreibung, Statusbadge (grün/gelb/rot), letzte Ausführung, Buttons: Jetzt ausführen, Bearbeiten, Protokoll anzeigen. Detailkarte: große Statusanzeige, letzte 3 Logs. Metriken: aktive Agents, Fehler 24h, Durchsatz/min, Letzte Ausführungszeit mit Sparklines. Workflow: Trigger->Condition->Aktionen->Output, Icons, farbliche Hervorhebung für aktive Pfade. Farbpalette: #0F172A, #10B981, #F59E0B, #FFFFFF, #F3F4F6. Typo: Inter (H1 20–24px, Body 14px). Microcopy DE. Export: PNG 1920x1080, SVG mit benannten Layers, annotated JSON spec. Variants: Light/Dark, Mobile 375x812. Einschränkungen: keine Markenlogos, kein Wasserzeichen, keine fotorealistischen Personen."
+    },
+    {
+      "id": "image_gen",
+      "type": "image_generation",
+      "model": "stable-diffusion-or-your-model",
+      "prompt_step_ref": "generate_prompt",
+      "params": {
+        "width": "${inputs.width}",
+        "height": "${inputs.height}",
+        "format": "png",
+        "negative_prompt": "kein Wasserzeichen, keine Signaturen, keine fremden Logos, keine fotoreal. Menschen"
+      }
+    },
+    {
+      "id": "postprocess",
+      "type": "file_actions",
+      "actions": [
+        {
+          "action": "convert_to_svg",
+          "options": {
+            "layers_named": true
+          }
+        },
+        {
+          "action": "save_to_repo",
+          "options": {
+            "repo": "<owner>/<repo>",
+            "path": "designs/agents-mockup.png",
+            "commit_message": "Add agents dashboard mockup"
+          }
+        }
+      ]
+    },
+    {
+      "id": "notify",
+      "type": "notification",
+      "channel": "#design",
+      "message": "Agent 'Image Generator (Dashboard Mockup)' hat ein neues Mockup erzeugt: {{files[0].url}}"
+    }
+  ]
+}

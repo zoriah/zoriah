@@ -1,0 +1,128 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Agent Definition Schema",
+  "description": "Schema for defining automated agents with workflows",
+  "type": "object",
+  "required": ["name", "description", "trigger", "steps"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the agent"
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of what the agent does"
+    },
+    "trigger": {
+      "type": "array",
+      "description": "How the agent can be triggered",
+      "items": {
+        "type": "string",
+        "enum": ["manual", "webhook", "schedule", "event"]
+      },
+      "minItems": 1
+    },
+    "inputs": {
+      "type": "object",
+      "description": "Input parameters for the agent",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["string", "integer", "number", "boolean", "array", "object"]
+          },
+          "default": {
+            "description": "Default value for the input"
+          },
+          "options": {
+            "type": "array",
+            "description": "Allowed values for the input"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the input parameter"
+          }
+        }
+      }
+    },
+    "steps": {
+      "type": "array",
+      "description": "Workflow steps to execute",
+      "items": {
+        "type": "object",
+        "required": ["id", "type"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the step"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of step to execute",
+            "enum": [
+              "set_prompt",
+              "image_generation",
+              "file_actions",
+              "notification",
+              "api_call",
+              "condition",
+              "loop"
+            ]
+          },
+          "content": {
+            "type": "string",
+            "description": "Content for the step (e.g., prompt text)"
+          },
+          "model": {
+            "type": "string",
+            "description": "Model to use (for generation steps)"
+          },
+          "prompt_step_ref": {
+            "type": "string",
+            "description": "Reference to a previous prompt step"
+          },
+          "params": {
+            "type": "object",
+            "description": "Parameters for the step"
+          },
+          "actions": {
+            "type": "array",
+            "description": "Actions to perform (for file_actions steps)"
+          },
+          "channel": {
+            "type": "string",
+            "description": "Channel for notifications"
+          },
+          "message": {
+            "type": "string",
+            "description": "Message content for notifications"
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata for the agent",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Version of the agent definition"
+        },
+        "author": {
+          "type": "string",
+          "description": "Author of the agent"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Tags for categorizing the agent"
+        }
+      }
+    }
+  }
+}
